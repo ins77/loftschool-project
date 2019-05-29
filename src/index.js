@@ -66,14 +66,12 @@ const upperProps = (obj) => {
  Посмотрите как работает slice и повторите это поведение для массива, который будет передан в параметре array
  */
 const slice = (array, from = 0, to = array.length) => {
-    if (to > array.length) {
-        to = array.length;
-    }
-
-    const lastArrayIndex = array.length - 1;
+    const length = array.length;
+    const endValue = to > length ? length : to;
+    const lastArrayIndex = length - 1;
     const currentIndex = from < 0 ? 0 : from;
-    const lastIndexPredicate = to < 0 && Math.abs(to) < array.length;
-    const lastIndex = lastIndexPredicate ? array[lastArrayIndex - Math.abs(to)] : to;
+    const lastIndexPredicate = endValue < 0 && Math.abs(endValue) < length;
+    const lastIndex = lastIndexPredicate ? array[lastArrayIndex - Math.abs(endValue)] : endValue;
 
     let newArr = [];
 
