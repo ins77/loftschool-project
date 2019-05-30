@@ -26,7 +26,7 @@ const isAllTrue = (array, fn) => {
     }
 
     for (let i = 0; i < array.length; i++) {
-        if (fn(array[i]) === false) {
+        if (!fn(array[i])) {
             return false;
         }
     }
@@ -60,7 +60,7 @@ function isSomeTrue(array, fn) {
     }
 
     for (let i = 0; i < array.length; i++) {
-        if (fn(array[i]) === true) {
+        if (fn(array[i])) {
             return true;
         }
     }
