@@ -51,7 +51,7 @@ const isAllTrue = (array, fn) => {
    isSomeTrue([1, 2, 3, 4, 5], n => n > 20) // вернет false
  */
 function isSomeTrue(array, fn) {
-    if (!Array.isArray(array) || !array.length) {
+    if (array.constructor !== Array || !array.length) {
         throw new Error('empty array');
     }
 
