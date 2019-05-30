@@ -17,7 +17,7 @@
    isAllTrue([100, 2, 3, 4, 5], n => n < 10) // вернет false
  */
 const isAllTrue = (array, fn) => {
-    if (!Array.isArray(array) || !array.length) {
+    if (array.constructor !== Array || !array.length) {
         throw new Error('empty array');
     }
 
