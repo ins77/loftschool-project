@@ -121,7 +121,7 @@ const deleteTextNodesRecursive = (where) => {
             deleteTextNodesRecursive(node);
         }
     });
-}
+};
 
 /*
  Задание 7 *:
@@ -191,7 +191,7 @@ const collectDOMStat = (root) => {
         tags,
         classes
     };
-}
+};
 
 /*
  Задание 8 *:
@@ -225,8 +225,8 @@ const collectDOMStat = (root) => {
      nodes: [div]
    }
  */
-function observeChildNodes(where, fn) {
-}
+const observeChildNodes = (where, fn) => {
+};
 
 export {
     createDivWithText,
