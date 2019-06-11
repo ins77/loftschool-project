@@ -158,17 +158,14 @@ const collectDOMStat = (root) => {
         ), [])
     );
     
-    const getItemCount = (array, item) => (
-        array.reduce((acc, currentItem) => (currentItem === item ? acc + 1 : acc), 0)
+    const getItemsCount = (array) => (
+        array.reduce((acc, currentItem) => {
+            const value = acc.hasOwnProperty(currentItem) ? acc[currentItem] + 1 : 1;
+
+            console.log('######', acc.hasOwnProperty(currentItem));
+            return acc[currentItem] = value;
+        }, {})
     );
-    
-    const getItemsCount = (array, items) => (
-        array.reduce((acc, currentItem) => (
-            {...acc, [currentItem]: getItemCount(items, currentItem)}
-        ), {})
-    )
-    
-    const getArrayFromSet = array => [...new Set(array)];
     
     const flattenNodes = getFlattenNodes(root);
     const elements = flattenNodes.filter(({ nodeType }) => nodeType === 1);
@@ -178,13 +175,11 @@ const collectDOMStat = (root) => {
     
     // tags
     const tagsAll = elements.map(({ tagName }) => tagName);
-    const tagsSet = getArrayFromSet(tagsAll);
-    const tags = getItemsCount(tagsSet, tagsAll);
+    const tags = getItemsCount(tagsAll);
     
     // classes
     const classesAll = getFlattenClasses(elements);
-    const classesSet = getArrayFromSet(classesAll);
-    const classes = getItemsCount(classesSet, classesAll);
+    const classes = getItemsCount(classesAll);
 
     return {
         texts: textsNodes.length,
