@@ -82,50 +82,48 @@ filterInput.addEventListener('keyup', debounce(() => {
 
     loadingBlock.style.display = 'block';
     filterResult.style.display = 'none';
-
-    const onFulfilled = (towns) => {
-        loadingBlock.style.display = 'none';
-        filterResult.style.display = 'block';
-
-        const inputValue = filterInput.value;
-        const filteredTowns = towns.filter(({ name }) => inputValue !== '' && isMatching(name, inputValue));
-        const fragment = document.createDocumentFragment();
     
-        for (let town of filteredTowns) {
+    loadTowns()
+        .then((towns) => {
+            loadingBlock.style.display = 'none';
+            filterResult.style.display = 'block';
+    
+            const inputValue = filterInput.value;
+            const filteredTowns = towns.filter(({ name }) => inputValue !== '' && isMatching(name, inputValue));
+            const fragment = document.createDocumentFragment();
+        
+            for (let town of filteredTowns) {
+                const div = document.createElement('div');
+                
+                div.textContent = town.name;
+                fragment.appendChild(div);
+            }
+        
+            filterResult.appendChild(fragment);
+        })
+        .catch(() => {
+            filterBlock.style.display = 'none';
+            loadingBlock.style.display = 'none';
+        
             const div = document.createElement('div');
-            
-            div.textContent = town.name;
-            fragment.appendChild(div);
-        }
+            const buttonReplay = document.createElement('button');
+        
+            div.textContent = 'Не удалось загрузить города';
+            buttonReplay.textContent = 'Повторить';
+            buttonReplay.setAttribute('id', 'button-replay');
+        
+            homeworkContainer.appendChild(div);
+            homeworkContainer.appendChild(buttonReplay);
+        
+            buttonReplay.addEventListener('click', () => {
+                homeworkContainer.removeChild(buttonReplay);
+                homeworkContainer.removeChild(div);
     
-        filterResult.appendChild(fragment);
-    };
-    
-    const onRejected = () => {
-        filterBlock.style.display = 'none';
-        loadingBlock.style.display = 'none';
-    
-        const div = document.createElement('div');
-        const buttonReplay = document.createElement('button');
-    
-        div.textContent = 'Не удалось загрузить города';
-        buttonReplay.textContent = 'Повторить';
-        buttonReplay.setAttribute('id', 'button-replay');
-    
-        homeworkContainer.appendChild(div);
-        homeworkContainer.appendChild(buttonReplay);
-    
-        buttonReplay.addEventListener('click', () => {
-            homeworkContainer.removeChild(buttonReplay);
-            homeworkContainer.removeChild(div);
-
-            filterBlock.style.display = 'block';
-    
-            filterInput.dispatchEvent(new KeyboardEvent('keyup'));
+                filterBlock.style.display = 'block';
+        
+                filterInput.dispatchEvent(new KeyboardEvent('keyup'));
+            });
         });
-    };
-    
-    loadTowns().then(onFulfilled, onRejected);
 }, 500));
 
 export {
