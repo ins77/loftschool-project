@@ -57,43 +57,9 @@ addButton.addEventListener('click', () => {
 
     setCookie(name, value);
     renderCookieTable();
-
-    // const filteredCookieNames = Object.keys(getFilteredCookies(filterNameInput.value));
-
-    // if (isCookieNameExists(name)) {
-    //     updateCookieRow(name, value);
-    // }
-
-    // if (!filteredCookieNames.includes(name)) {
-    //     if (isCookieNameExists(name)) {
-    //         removeCookieRow(name);
-    //     }
-
-    //     return;
-    // }
-
-    // if (isCookieNameExists(name)) {
-    //     updateCookieRow(name, value);
-    // }
-    // } else {
-    //     addCookieRow(name, value);
-    // }
 });
 
-const setCookie = (name, value, expires) => {
-    document.cookie = `${name}=${value}; expires=${expires}`;
-};
-
-const removeCookie = (name) => {
-    const date = new Date();
-
-    date.setDate(date.getDate() - 1);
-    setCookie(name, '', date.toUTCString());
-};
-
-const getFilteredCookies = (filterValue) => {
-    const cookie = document.cookie;
-
+const getFilteredCookies = (filterValue, cookie) => {
     if (!cookie) {
         return [];
     }
@@ -110,12 +76,6 @@ const getFilteredCookies = (filterValue) => {
     }, {});
 };
 
-// const isCookieNameExists = (name) => {
-//     const cookieNameCells = listTable.querySelectorAll('.cookie-name');
-
-//     return [...cookieNameCells].some(cell => cell.textContent === name);
-// };
-
 const getCookiesObject = (cookie) => {
     return cookie.split('; ').reduce((acc, current) => {
         const [name, value] = current.split('=');
@@ -126,23 +86,7 @@ const getCookiesObject = (cookie) => {
     }, {});
 };
 
-// const removeCookieRow = (name) => {
-//     const cookieNameCells = listTable.querySelectorAll('.cookie-name');
-//     const nameCell = [...cookieNameCells].find(cell => cell.textContent === name);
-//     const currentRow = nameCell.parentElement;
-
-//     currentRow.remove();
-// };
-
-// const updateCookieRow = (name, value) => {
-//     const cookieNameCells = listTable.querySelectorAll('.cookie-name');
-//     const nameCell = [...cookieNameCells].find(cell => cell.textContent === name);
-//     const valueCell = nameCell.parentElement.querySelector('.cookie-value');
-
-//     valueCell.textContent = value;
-// };
-
-const addCookieRow = (name, value) => {
+const generateCookieRowDom = (name, value) => {
     const tableRow = document.createElement('tr');
     const tableCellName = document.createElement('td');
     const tableCellValue = document.createElement('td');
@@ -160,7 +104,6 @@ const addCookieRow = (name, value) => {
     tableRow.append(tableCellName);
     tableRow.append(tableCellValue);
     tableRow.append(tableCellDelete);
-    listTable.append(tableRow);
 
     const onButtonDeleteClick = () => {
         removeCookie(name);
@@ -168,17 +111,35 @@ const addCookieRow = (name, value) => {
     };
 
     buttonDelete.addEventListener('click', onButtonDeleteClick);
+
+    return tableRow;
 };
 
 const renderCookieTable = () => {
     listTable.innerHTML = '';
 
     const cookies = getCookiesObject(document.cookie);
-    const filteredCookies = getFilteredCookies(filterNameInput.value);
+    const filteredCookies = getFilteredCookies(filterNameInput.value, document.cookie);
+    const fragment = document.createDocumentFragment();
 
     for (let cookieName of Object.keys(filteredCookies)) {
-        addCookieRow(cookieName, cookies[cookieName]);
+        const cookieRow = generateCookieRowDom(cookieName, cookies[cookieName]);
+
+        fragment.append(cookieRow);
     }
+
+    listTable.append(fragment);
+};
+
+const setCookie = (name, value, expires) => {
+    document.cookie = `${name}=${value}; expires=${expires}`;
+};
+
+const removeCookie = (name) => {
+    const date = new Date();
+
+    date.setDate(date.getDate() - 1);
+    setCookie(name, '', date.toUTCString());
 };
 
 const init = () => {
