@@ -93,9 +93,6 @@ const generateCookieRowDom = (name, value) => {
     const tableCellDelete = document.createElement('td');
     const buttonDelete = document.createElement('button');
 
-    tableCellName.classList.add('cookie-name');
-    tableCellValue.classList.add('cookie-value');
-
     tableCellName.textContent = name;
     tableCellValue.textContent = value;
     buttonDelete.textContent = 'Удалить';
