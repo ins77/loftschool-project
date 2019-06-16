@@ -109,7 +109,7 @@ describe('ДЗ 4 - Работа с DOM', () => {
         });
     });
 
-    describe.only('collectDOMStat', () => {
+    describe('collectDOMStat', () => {
         it('должна вернуть статистику по переданному дереву', () => {
             let where = document.createElement('div');
             let class1 = `class-${random('number')}`;
@@ -125,8 +125,6 @@ describe('ДЗ 4 - Работа с DOM', () => {
 
             where.innerHTML = `<p class="${class1}"><b>${text1}</b> <b class="${class1} ${class2}">${text2}</b></p>`;
             result = collectDOMStat(where);
-            console.log('result', result.tags);
-            console.log('stat', stat.tags);
             assert.deepEqual(result, stat);
         });
     });

@@ -162,7 +162,6 @@ const collectDOMStat = (root) => {
         array.reduce((acc, currentItem) => {
             const value = acc.hasOwnProperty(currentItem) ? acc[currentItem] + 1 : 1;
 
-            console.log('######', acc.hasOwnProperty(currentItem));
             return acc[currentItem] = value;
         }, {})
     );
@@ -221,6 +220,30 @@ const collectDOMStat = (root) => {
    }
  */
 const observeChildNodes = (where, fn) => {
+    const observer = new MutationObserver((mutationRecords) => {
+        mutationRecords.forEach((record) => {
+            let data;
+
+            if (record.addedNodes.length) {
+                data = {
+                    type: 'insert',
+                    nodes: [...record.addedNodes]
+                };
+            } else if (record.removedNodes.length) {
+                data = {
+                    type: 'remove',
+                    nodes: [...record.removedNodes]
+                };
+            }
+
+            fn(data);
+        });
+    });
+
+    observer.observe(where, {
+        childList: true,
+        subtree: true
+    });
 };
 
 export {
