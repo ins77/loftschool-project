@@ -31,8 +31,7 @@ const init = () => {
         const areFieldsEmpty = !(name && place && review);
 
         if (areFieldsEmpty) {
-            // todo
-            console.log('Заполните все обязательные поля');
+            alert('Заполните все обязательные поля');
             return;
         }
 
