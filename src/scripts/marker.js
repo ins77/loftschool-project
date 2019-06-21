@@ -35,7 +35,7 @@ const initMarkers = (map, clusterer, popup) => {
     
     markers.forEach(marker => {
         const { reviews, address, coords } = marker;
-        const point = { address, coords };
+        const point = { address, coords: coords.split(',') };
         
         for (let review of reviews) {
             addMarkerToMap(map, clusterer, point, review, popup);
