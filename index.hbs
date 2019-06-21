@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="UTF-8">
-  <title>{{htmlWebpackPlugin.options.title}}</title>
-  {{!-- <script src="https://api-maps.yandex.ru/2.1/?apikey=753aab6d-f0d5-4334-a020-6d947f456538&lang=ru_RU" type="text/javascript"></script> --}}
-  <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
-</head>
-<body>
-  {{> "./src/components/map/map.hbs"}}
-  {{> "./src/components/reviewForm/reviewForm.hbs"}}
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <title>Friends-filter</title>
+        <script src="https://api-maps.yandex.ru/2.1/?apikey=753aab6d-f0d5-4334-a020-6d947f456538&lang=ru_RU" type="text/javascript"></script>
+    </head>
+    <body>        
+        <div class="wrap">
+            <div class="map" id="map"></div>
+            <div class="review-wrap hidden" id="review-wrap"></div>
+        </div>
+    </body>
 </html>
