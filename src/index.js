@@ -68,6 +68,8 @@ const init = () => {
             return;
         }
 
+        event.preventDefault();
+
         myMap.balloon.close();
 
         const { address, coords } = balloonLink.dataset;
