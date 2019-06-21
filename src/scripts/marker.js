@@ -34,8 +34,8 @@ const initMarkers = (map, clusterer, popup) => {
     }
     
     markers.forEach(marker => {
-        const { reviews, address, coords } = marker;
-        const point = { address, coords: coords.split(',') };
+        const { reviews, address, coords, position } = marker;
+        const point = { address, coords, position };
         
         for (let review of reviews) {
             addMarkerToMap(map, clusterer, point, review, popup);
@@ -69,11 +69,12 @@ const getMarkerReviews = (address) => {
     return currentMarker && currentMarker.reviews || [];
 };
 
-const addMarkerToStorage = (address, coords, review) => {
+const addMarkerToStorage = (point, review) => {
     const markers = JSON.parse(localStorage.getItem('markers'));
+    const { address, coords, position } = point;
 
     if (!markers) {
-        const storageData = [{address, coords, reviews: [review]}];
+        const storageData = [{address, coords, position, reviews: [review]}];
 
         localStorage.setItem('markers', JSON.stringify(storageData));
 
@@ -83,7 +84,7 @@ const addMarkerToStorage = (address, coords, review) => {
     const existingAddress = markers.find(marker => marker.address === address);
 
     if (!existingAddress) {
-        const storageData = [...markers, {address, coords, reviews: [review]}];
+        const storageData = [...markers, {address, coords, position, reviews: [review]}];
 
         localStorage.setItem('markers', JSON.stringify(storageData));
 

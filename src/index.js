@@ -45,7 +45,7 @@ const init = () => {
         };
     
         addMarkerToMap(myMap, clusterer, point, newReview, popup);
-        addMarkerToStorage(address, coords, newReview);
+        addMarkerToStorage(point, newReview);
         renderReviewPopup(popup, point);
     };
 
