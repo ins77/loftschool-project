@@ -1,0 +1,15 @@
+.form-field {
+    border: 1px solid #9f9f9f;
+    width: 100%;
+    height: 33px;
+    padding: 0 10px;
+    margin-bottom: 15px; 
+    border-radius: 17px;
+    outline: none;
+}
+
+.form-field_textarea {
+    height: 130px;
+    padding: 10px;
+    resize: none;
+}

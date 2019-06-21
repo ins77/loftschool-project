@@ -1,0 +1,140 @@
+.review {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    width: 380px;
+    height: 520px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.popup {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;  
+}
+
+.popup__header {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 45px;
+    padding-left: 35px;
+    padding-right: 35px;
+    color: #fff;
+    background-color: #ff8663;
+}
+
+.popup__header-icon {
+    position: absolute;
+    top: calc(50% - 12px);
+    left: 10px;
+    width: 15px;
+    height: 21px;
+    background-image: url('../img/marker.svg');
+}
+
+.popup__header-title {
+    max-height: 30px;
+    overflow: hidden;
+}
+
+.popup__header-close {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 32px;
+    cursor: pointer;
+    transition: all, .3s;
+}
+
+.popup__header-close:before,
+.popup__header-close:after {
+    content: '';
+    position: absolute;
+    top: calc(50% - 9px);
+    left: 14px;
+    height: 15px;
+    width: 3px;
+    background-color: #fff;
+    border-radius: 1px;
+}
+
+.popup__header-close:before {
+    transform: rotate(45deg);
+}
+
+.popup__header-close:after {
+    transform: rotate(-45deg);
+}
+
+.popup__header-close:hover {
+    opacity: .5;
+}
+
+.popup__content {
+    width: 100%;
+    height: 160px;
+    padding: 0 15px;
+    border-bottom: 1px solid #f0f0f0;
+    background: #fff;
+    font-size: 14px;
+    overflow-y: auto;
+}
+
+.popup__list {
+    width: 100%;
+    height: 100%;
+}
+
+.popup__list-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.popup__list-item-header {
+    display: flex;
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+.popup__list-item-name {
+    margin-right: 5px;
+}
+
+.popup__list-item-place, 
+.popup__list-item-date {
+    margin-right: 5px;
+    color: #9f9f9f;
+}
+
+.popup__list-item-text {
+    margin-bottom: 5px;
+}
+
+.popup__form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 0 15px;
+    background: #fff;
+    font-size: 14px;
+}
+
+.popup__form-title {
+    display: flex;
+    align-items: center; 
+    width: 100%;
+    height: 45px;
+    color: #ff8663;
+    text-transform: uppercase;
+    font-size: 14px;
+}
+
+.popup__form-button {
+    margin: 0 0 15px auto;
+}

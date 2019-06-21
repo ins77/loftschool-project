@@ -1,0 +1,30 @@
+.balloon {
+    position: relative;
+    height: 160px;
+    width: 100%;
+    padding-top: 10px;
+}
+
+.balloon__header {
+    height: 15px;
+    margin-bottom: 5px;
+    font-weight: 700;
+    font-size: 12px;
+}
+
+.balloon__body {
+    height: 62px;
+    margin-top: 5px;
+    overflow: hidden;
+}
+
+.balloon__link {
+    font-size: 12px;
+}
+
+.balloon__footer {
+    position: absolute;
+    right: 5px;
+    bottom: 5px;
+    color: gray;
+}

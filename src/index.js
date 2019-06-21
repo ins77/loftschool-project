@@ -1,19 +1,16 @@
-import 'normalize.css';
-import './style/base.css';
-import './style/index.css';
-
+import './styles/index.css';
 
 import addClusterer from './scripts/clusterer';
-import { addMarkerToMap, initMarkers, getMarkerData } from './scripts/marker';
-import { addMarkerToStorage }  from './scripts/storage';
+import { addMarkerToStorage, addMarkerToMap, initMarkers, getMarkerData } from './scripts/marker';
 import { renderReviewPopup, hideReviewPopup, getPopupPosition }  from './scripts/popup';
+import { getFullDate } from './scripts/helpers/date';
 
 const init = () => {
     const myMap = new ymaps.Map('map', {
         center: [55.76, 37.64],
         zoom: 13
     });
-    const popup = document.querySelector('#review-wrap');
+    const popup = document.querySelector('#popup-review');
     const clusterer = addClusterer(myMap, popup);
 
     initMarkers(myMap, clusterer, popup);
@@ -95,32 +92,5 @@ const init = () => {
     popup.addEventListener('click', onButtonCloseClick);
     document.addEventListener('click', onBalloonLinkClick);
 };
-
-
-// helpers
-
-const getFormattedDate = (date) => {
-    const day = date.getDate();
-    const month = date.getMonth() + 1;
-    const year = date.getFullYear();
-    const formattedDay = day < 10 ? `0${day}` : `${day}`;
-    const formattedMonth= month < 10 ? `0${month}` : `${month}`;
-    const formattedYear = year < 10 ? `0${year}` : `${year}`;
-
-    return `${formattedYear}.${formattedMonth}.${formattedDay}`;
-};
-
-const getFormattedTime = (date) => {
-    const seconds = date.getSeconds();
-    const minutes = date.getMinutes();
-    const hours = date.getHours();
-    const formattedSeconds = seconds < 10 ? `0${seconds}` : `${seconds}`;
-    const formattedMinutes = minutes < 10 ? `0${seconds}` : `${minutes}`;
-    const formattedHours = hours < 10 ? `0${seconds}` : `${hours}`;
-
-    return `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
-};
-
-const getFullDate = date => `${getFormattedDate(date)} ${getFormattedTime(date)}`;
 
 ymaps.ready(init);

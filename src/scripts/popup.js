@@ -1,4 +1,4 @@
-import { getMarkerReviews } from './storage';
+import { getMarkerReviews } from './marker';
 import makeReviewTemplate from '../templates/makeReviewTemplate.hbs';
 
 const getPopupPosition = (popup, position) => {

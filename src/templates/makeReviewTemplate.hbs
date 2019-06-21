@@ -1,31 +1,40 @@
-<div class="review">
-    <div class="header" id="header">
-        <div class="title">
-            <img class="title__pic" src="./src/img/map_marker.svg"/>
-            <div class="title__text">{{ address }}</div>        
-        </div>
-        <div class="header__close" id="close"></div>
+<div class="popup">
+
+    <div class="popup__header" id="header">
+        <div class="popup__header-icon"></div>
+        <div class="popup__header-title">{{ address }}</div>  
+        <div class="popup__header-close" id="close"></div>
     </div>
-    <div class="review__content">
-        <ul class="review__list" id="reviewList">
-            Пока отзывов нет...
-            {{#each reviews}}
-            <li class="review__item">
-                <div class="review__title">
-                    <div class="review__name">{{ name }}</div>
-                    <div class="review__place">{{ place }}</div>
-                    <div class="review__date">{{ date }}</div>
-                </div>    
-                <div class="review__text">{{ review }}</div>
-            </li>
-            {{/each}}
+
+    <div class="popup__content">
+        <ul class="popup__list">
+            {{#if reviews}}
+                {{#each reviews}}
+                    <li class="popup__list-item">
+                        <div class="popup__list-item-header">
+                            <div class="popup__list-item-name">{{ name }}</div>
+                            <div class="popup__list-item-place">{{ place }}</div>
+                            <div class="popup__list-item-date">{{ date }}</div>
+                        </div>    
+                        <div class="popup__list-item-text">{{ review }}</div>
+                    </li>
+                {{/each}}
+            {{else}}
+                <li class="popup__list-item">
+                    <div class="popup__list-item-header">
+                        <div class="popup__list-item-name">Пока отзывов нет...</div>
+                    </div>
+                </li>
+            {{/if}}
         </ul>
     </div>
-    <form class="form">
-        <div class="form__title">ваш отзыв</div>
-        <input type="text" id="name" class="form__input form__input--name" placeholder="Ваше имя">
-        <input type="text" id="place" class="form__input form__input--place" placeholder="Укажите место">
-        <textarea id="review" class="form__input form__input--review" placeholder="Поделитесь впечатлениями"></textarea>
-        <button type="submit" class="form__btn" id="save">Добавить</button>
+
+    <form class="popup__form">
+        <div class="popup__form-title">ваш отзыв</div>
+        <input id="name" type="text" class="form-field" placeholder="Ваше имя">
+        <input id="place" type="text" class="form-field" placeholder="Укажите место">
+        <textarea id="review" class="form-field form-field_textarea" placeholder="Поделитесь впечатлениями"></textarea>
+        <button id="save" type="submit" class="button popup__form-button">Добавить</button>
     </form>
+
 </div>
