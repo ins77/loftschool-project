@@ -2,11 +2,9 @@ import { getMarkerReviews } from './marker';
 import makeReviewTemplate from '../templates/makeReviewTemplate.hbs';
 
 const getPopupPosition = (popup, position) => {
-    const [positionX, positionY] = position;
-    const displayWidth = document.documentElement.clientWidth;
-    const displayHeight = document.documentElement.clientHeight;
-    const popupWidth = popup.clientWidth;
-    const popupHeight = popup.clientHeight;
+    const [ positionX, positionY ] = position;
+    const { clientWidth: displayWidth, clientHeight: displayHeight } = document.documentElement;
+    const { clientWidth: popupWidth, clientHeight: popupHeight } = popup;
     const x = positionX > displayWidth - popupWidth ? positionX - popupWidth : positionX;
 
     if (displayHeight - positionY > popupHeight) {
