@@ -85,7 +85,7 @@ const init = () => {
 
     const onMapClick = async (event) => {
         const point = await getMarkerData(event, popup);
-        await renderReviewPopup(popup, point);
+        renderReviewPopup(popup, point);
     };
 
     myMap.events.add('click', onMapClick);
